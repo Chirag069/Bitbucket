@@ -7,17 +7,23 @@ import Navigation from './Navigation';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {persistor, store} from './Redux/store';
 import {themecolor, white} from './utils/color';
+import {PaperProvider} from 'react-native-paper';
 
 const App = () => {
   return (
     <GestureHandlerRootView style={{flex: 1}}>
       <SafeAreaProvider>
-        <Provider store={store}>
-          <PersistGate loading={true} persistor={persistor}>
-            <StatusBar backgroundColor={themecolor} barStyle={'dark-content'} />
-            <Navigation />
-          </PersistGate>
-        </Provider>
+        <PaperProvider>
+          <Provider store={store}>
+            <PersistGate loading={true} persistor={persistor}>
+              <StatusBar
+                backgroundColor={themecolor}
+                barStyle={'dark-content'}
+              />
+              <Navigation />
+            </PersistGate>
+          </Provider>
+        </PaperProvider>
       </SafeAreaProvider>
     </GestureHandlerRootView>
   );

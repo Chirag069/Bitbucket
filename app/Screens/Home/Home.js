@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
   container: {flex: 1, marginHorizontal: scale(10)},
   labletext: {
     fontSize: scale(20),
-    color: 'blue',
+    color: '#221d69',
     fontWeight: 'bold',
   },
   lableview: {

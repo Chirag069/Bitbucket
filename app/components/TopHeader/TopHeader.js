@@ -12,9 +12,16 @@ import scale, {verticalScale} from '../../utils/scale';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import Entypo from 'react-native-vector-icons/Entypo';
+import {Button, Menu, Divider, PaperProvider, List} from 'react-native-paper';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const TopHeader = ({title}) => {
   const navigation = useNavigation();
+  const [visible, setVisible] = React.useState(false);
+
+  const openMenu = () => setVisible(true);
+
+  const closeMenu = () => setVisible(false);
   return (
     <View style={styles.Category}>
       <Text style={styles.headerText}>{title}</Text>
@@ -22,9 +29,33 @@ const TopHeader = ({title}) => {
         <TouchableOpacity onPress={() => {}}>
           <Feather name="bell" size={scale(25)} color={white} />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => {}}>
-          <Entypo name="dots-three-vertical" size={scale(25)} color={white} />
-        </TouchableOpacity>
+        <Menu
+          visible={visible}
+          onDismiss={closeMenu}
+          anchor={
+            <TouchableOpacity onPress={openMenu}>
+              <Entypo
+                name="dots-three-vertical"
+                size={scale(25)}
+                color={white}
+              />
+            </TouchableOpacity>
+          }>
+          <List.Item
+            title="Settings"
+            onPress={() => {}}
+            right={props => (
+              <MaterialCommunityIcons {...props} name="cog" size={24} />
+            )}
+          />
+          <List.Item
+            title="Logout"
+            onPress={() => {}}
+            right={props => (
+              <MaterialCommunityIcons {...props} name="logout" size={24} />
+            )}
+          />
+        </Menu>
       </View>
     </View>
   );
@@ -41,7 +72,6 @@ const styles = StyleSheet.create({
   Category: {
     flexDirection: 'row',
     justifyContent: 'center',
-
     alignItems: 'center',
     paddingHorizontal: scale(20),
     backgroundColor: themecolor,
